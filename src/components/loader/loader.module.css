@@ -1,0 +1,22 @@
+.error {
+  color: rgb(214, 38, 38);
+}
+
+.loader__container {
+  display: flex;
+  align-items: center;
+}
+
+.loader {
+  margin-left: 10px;
+  animation: rotateAnimation 2s infinite linear;
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
