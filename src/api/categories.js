@@ -19,7 +19,7 @@ export async function searchCategories(jwt, searchQuery, show = false) {
 }
 
 export async function getCategories(jwt, page, show = false) {
-  let url = `/categories?pagination[page]=${page}&pagination[pageSize]=2`;
+  let url = `/categories?pagination[page]=${page}&pagination[pageSize]=10`;
 
   if (!show) {
    // url += '&filters[Employee_active][$eq]=true';
@@ -39,8 +39,8 @@ export async function getCategories(jwt, page, show = false) {
 }
 
  
-export async function getEmployee(jwt, id) {
-  const res = await axios.get(`/employees/${id}`, {
+export async function getCategory(jwt, id) {
+  const res = await axios.get(`/categories/${id}`, {
     headers: {
       authorization: `Bearer ${jwt}`,
     },
@@ -61,8 +61,8 @@ export async function addCategory(jwt, data) {
   return res.data;
 }
 
-export async function deleteEmployee(jwt, index) {
-  const res = await axios.delete(`/employees/${index}`, {
+export async function deleteCategory(jwt, index) {
+  const res = await axios.delete(`/categories/${index}`, {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
@@ -70,9 +70,9 @@ export async function deleteEmployee(jwt, index) {
   return res;
 }
 
-export async function updateEmployees(jwt, id, data) {
+export async function updateCategory(jwt, id, data) {
   const res = await axios.put(
-    `/employees/${id}`,
+    `/categories/${id}`,
     { data: data },
     {
       headers: {

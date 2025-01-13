@@ -23,6 +23,7 @@ const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'))
 
 const Categories = React.lazy(() => import('./views/categories/Categories'))
 const AddCategory = React.lazy(() => import('./views/categories/AddCategory'))
+const EditCategory = React.lazy(() => import('./views/categories/EditCategory'))
 
 
 // Buttons
@@ -60,6 +61,7 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/categories', name: 'Categories', element: Categories },
   { path: '/categories/add', name: 'Add Category', element: AddCategory },
+  { path: '/categories/edit/:id', name: 'Edit Category', element: EditCategory },
   // { path: '/theme', name: 'Theme', element: Colors, exact: true },
   // { path: '/theme/colors', name: 'Colors', element: Colors },
   // { path: '/theme/typography', name: 'Typography', element: Typography },

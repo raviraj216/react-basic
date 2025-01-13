@@ -10,18 +10,44 @@ import {
   CForm 
 } from '@coreui/react'
  
-import { addCategory } from "../../api/categories";
-import { useNavigate } from "react-router-dom";
+import { getCategory } from "../../api/categories";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const AddCategory = () => {
-  const navigate = useNavigate();
- 
+const EditCategory = () => {
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const { state } = useLocation();
     const [cookie] = useCookies(["user"]);
+
+
+console.log("id",id)
     const [category, setCategory] = useState([]);
     const [validated, setValidated] = useState(false)
+
+    useEffect(() => {
+        const fetchProjectData = async () => {
+           // setLoading(true);
+            try {
+                const { data } = await getCategory(cookie.jwt, id);
+                setCategory(data?.attributes);
+                if (data?.attributes) {
+                    setValue("Name", data.attributes?.Name);
+                }
+
+                console.log("categorycategory",category)
+            } catch (err) {
+                 toast.error(err.message);
+            } finally {
+               // setLoading(false);
+            }
+        };
+
+        fetchProjectData();
+    }, [cookie.jwt, id]);
+
 
     const handleSubmit = async (event) => {
       event.preventDefault()
@@ -66,4 +92,4 @@ const AddCategory = () => {
   )
 }
 
-export default AddCategory
+export default EditCategory

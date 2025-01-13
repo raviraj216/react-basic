@@ -106,14 +106,14 @@ const Categories = () => {
         { field: 'documentId', headerName: 'Document Id', flex: 1, headerClassName: 'employee-header' },
         {
           field: 'Edit', headerName: '', width: 30, renderCell: (params) => (
-            <Link onClick={(event) => event.stopPropagation()} to={`/categories/edit/${params.row.id}`}>
+            <Link onClick={(event) => event.stopPropagation()} to={`/categories/edit/${params.row.documentId}`}>
               <CIcon icon={cilPencil} customClassName="nav-icon" />
             </Link>
           )
         },
         {
           field: 'Delete', headerName: '', width: 30, renderCell: (params) => (
-            <div onClick={(e) => { e.stopPropagation(); handleRemoveEmployee(params.row.id, params.row.id); }}>
+            <div onClick={(e) => { e.stopPropagation(); handleRemoveEmployee(params.row.id, params.row.documentId); }}>
               <CIcon icon={cilTrash} customClassName="nav-icon" />
             </div>
           )
@@ -147,81 +147,42 @@ const Categories = () => {
  
 
  
-<div className="">
-  <Link className="btn btn-info add-button" style={{marginBottom:"10px"}}  onClick={(event) => event.stopPropagation()} to={`/categories/add/`}>
-    <CIcon icon={cilPlus} customClassName="" /> Add Category
-  </Link>
-</div>
-
-<DataGrid
-        rows={rows}
-        sx={{ border: '0px' }}
-        rowCount={totalCategories}
-        columns={columns}
-        localeText={{ noRowsLabel: "No Results" }}
-        
-        pageSizeOptions={[2]}
-
-         paginationMode="server"
-         onPaginationModelChange={({ page }) => setCurrentPage(page)}
-         disableColumnMenu
-        disableColumnFilter
-        //disableColumnSorting
-        initialState={{
-            pagination: {
-                paginationModel: { page: currentPage, pageSize: 2 },
-            },
-         }}
-      />
-
+      <div className="">
+        <Link className="btn btn-info add-button" style={{marginBottom:"10px"}}  onClick={(event) => event.stopPropagation()} to={`/categories/add/`}>
+          <CIcon icon={cilPlus} customClassName="" /> Add Category
+        </Link>
+      </div>
+ 
+      <p className="text-body-secondary small">
+             Filter
+            </p>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
             <strong>Categories</strong>
           </CCardHeader>
           <CCardBody>
-            <p className="text-body-secondary small">
-             Filter
-            </p>
-        
-              <CTable>
-                <CTableHead>
-                  <CTableRow>
-                    <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Class</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  <CTableRow>
-                    <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                    <CTableDataCell>Mark</CTableDataCell>
-                    <CTableDataCell>Otto</CTableDataCell>
-                    <CTableDataCell>@mdo</CTableDataCell>
-                  </CTableRow>
-                  <CTableRow>
-                    <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                    <CTableDataCell>Jacob</CTableDataCell>
-                    <CTableDataCell>Thornton</CTableDataCell>
-                    <CTableDataCell>@fat</CTableDataCell>
-                  </CTableRow>
-                  <CTableRow>
-                    <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                    <CTableDataCell colSpan={2}>Larry the Bird</CTableDataCell>
-                    <CTableDataCell>@twitter</CTableDataCell>
-                  </CTableRow>
-                </CTableBody>
-              </CTable>
+           
+            <DataGrid
+                rows={rows}
+                sx={{ border: '0px' }}
+                rowCount={totalCategories}
+                columns={columns}
+                localeText={{ noRowsLabel: "No Results" }}
+                
+                pageSizeOptions={[10]}
 
-              <CPagination aria-label="Page navigation">
-                <CPaginationItem aria-label="Previous"><span aria-hidden="true">&laquo;</span></CPaginationItem>
-                <CPaginationItem>1</CPaginationItem>
-                <CPaginationItem>2</CPaginationItem>
-                <CPaginationItem>3</CPaginationItem>
-                <CPaginationItem aria-label="Next"> <span aria-hidden="true">&raquo;</span></CPaginationItem>
-              </CPagination>
-
+                paginationMode="server"
+                onPaginationModelChange={({ page }) => setCurrentPage(page)}
+                disableColumnMenu
+                disableColumnFilter
+                //disableColumnSorting
+                initialState={{
+                    pagination: {
+                        paginationModel: { page: currentPage, pageSize: 10 },
+                    },
+                }}
+              />
           </CCardBody>
         </CCard>
       </CCol>
